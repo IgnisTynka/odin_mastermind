@@ -15,3 +15,8 @@ end
 #need find information about display colors in ruby 
 
 #need to make concept more more specific
+
+puts "Welcome to the game Mastermind! 
+You can be the code maker or the code breaker.
+Choose 1 if you want to be a code maker or 2 if you want to be a code breaker"
+role = gets.chomp.to_i - 1 
