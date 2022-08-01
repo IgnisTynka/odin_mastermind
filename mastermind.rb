@@ -36,6 +36,11 @@ if role == 1
 elsif role == 2
     mystery_code = Code.new("1234")
     player_code = ""
+    puts "Your mission is to guess the four-digit secret code. 
+After each attempt you will get information about how close you are according to the roles below:
+    2 - if both (digit and possition) are correct
+    1 - if digit is corect but position wrong
+    0 - if digit is wrong"
     
     until mystery_code.equal?(player_code)
         puts "Write 4 digits code"
