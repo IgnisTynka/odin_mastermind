@@ -5,6 +5,25 @@ class Code
     def equal?(other)
         return @code[0] == other[0] && @code[1] == other[1] && @code[2] == other[2] && @code[3] == other[3]
     end
+    # def get_total_info(guess)
+    #     total_info = ""
+    #     i = 0
+    #     4.times do
+    #         total_info += mystery_code.get_info(i, guess[i])
+    #         i += 1
+    #     end
+    #     return total_info
+    # end
+    def get_info(index, digit)
+        if @code.include?(digit)
+            if @code[index] == digit
+                return "2"
+            else 
+                return "1"
+            end
+        end
+        return "0"        
+    end
 end
 
 puts "Welcome to the game Mastermind! 
@@ -16,11 +35,17 @@ if role == 1
     puts "tbd"
 elsif role == 2
     mystery_code = Code.new("1234")
-    puts "Write 4 digits code"
-    player_code = gets.chomp
-
+    player_code = ""
+    
     until mystery_code.equal?(player_code)
         puts "Write 4 digits code"
-        player_code = gets.chomp  
+        player_code = gets.chomp
+        total_info = ""
+        i = 0
+        4.times do
+            total_info += mystery_code.get_info(i, player_code[i])
+            i += 1
+        end
+        puts total_info
     end
 end
