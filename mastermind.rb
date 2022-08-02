@@ -41,6 +41,8 @@ After each attempt you will get information about how close you are according to
     2 - if both (digit and possition) are correct
     1 - if digit is corect but position wrong
     0 - if digit is wrong"
+
+    number_of_attempts = 0
     
     until mystery_code.equal?(player_code)
         puts "Write 4 digits code"
@@ -52,5 +54,7 @@ After each attempt you will get information about how close you are according to
             i += 1
         end
         puts total_info
+        number_of_attempts += 1
     end
+    puts "Well done! You broke the code after #{number_of_attempts} try"
 end
