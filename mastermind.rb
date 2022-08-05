@@ -1,37 +1,4 @@
-class Code
-    attr_accessor :code
-    def initialize(code = "")
-        @code = code
-    end
-    def generate_code
-        i = 0
-        while i < 4
-            digit = rand(10).to_s
-            puts digit
-            unless @code.include?(digit)
-                @code[i] = digit
-                i += 1
-            end 
-        end
-        @code 
-    end 
-    def equal?(other)
-        return @code[0] == other[0] && @code[1] == other[1] && @code[2] == other[2] && @code[3] == other[3]
-    end
-    def get_info(index, digit)
-        if @code.include?(digit)
-            if @code[index] == digit
-                return "2"
-            else 
-                return "1"
-            end
-        end
-        return "0"        
-    end
-    def get_code
-        @code
-    end
-end
+require_relative './code.rb'
 
 puts "Welcome to the game Mastermind! 
 You can be the code maker or the code breaker.
@@ -53,8 +20,10 @@ After each attempt you will get information about how close you are according to
     number_of_attempts = 0
     
     until mystery_code.equal?(player_code)
-        puts "Write 4 digits code"
-        player_code = gets.chomp
+        until player_code.length == 4  
+            puts "Write 4 digits code"
+            player_code = gets.chomp
+        end
         total_info = ""
         i = 0
         4.times do
@@ -63,6 +32,7 @@ After each attempt you will get information about how close you are according to
         end
         puts total_info
         number_of_attempts += 1
+        player_code = ""
     end
     puts "Well done! You broke the code after #{number_of_attempts} try"
 end
