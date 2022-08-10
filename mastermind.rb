@@ -14,7 +14,7 @@ if role == 1
     mystery_code = Code.new(player_code)
     computer_code = Code.new(Code.new().generate_code)
     number_of_attempts = 1
-    puts "Let's go see how the code cratcking goes"
+    puts "Let's go see how the code cracking goes"
     puts computer_code.code
     until mystery_code.equal?(computer_code.code)
         i = 0
@@ -23,7 +23,7 @@ if role == 1
             if mystery_code.get_info(i, computer_code.code[i]) == "0"
                 computer_code.delete_from_pool(computer_code.code[i])
                 digit = computer_code.generate_digit
-                while newCode.include?(digit)
+                while newCode.include?(digit) || computer_code.code[i] == digit
                     digit = computer_code.generate_digit
                 end
                 newCode += digit
