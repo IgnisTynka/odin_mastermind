@@ -16,19 +16,15 @@ class Code
         end
         @code 
     end 
-    def change_digit(index)
-        digit = generate_digit(index)
-        while @code.include?(digit)
-            digit = generate_digit(index)
-        end
-        @code = replace_number(index, digit)
+    
+    def delete_from_pool(digit)
+        @digitPool.delete(digit.to_i)
     end
-    def generate_digit(index)
+    def generate_digit
         @digitPool.sample.to_s
     end
     def replace_number(index, digit)
         @code[index] = digit
-        @digitPool.delete(digit.to_i)
         return @code
     end
     def equal?(other)

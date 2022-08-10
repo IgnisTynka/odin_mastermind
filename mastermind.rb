@@ -13,25 +13,37 @@ if role == 1
     end
     mystery_code = Code.new(player_code)
     computer_code = Code.new(Code.new().generate_code)
-    # puts computer_code.code
-    # until mystery_code.equal?(computer_code.code)
-    #     i = 0
-    #     4.times do
-    #         if mystery_code.get_info(i, computer_code.code[i]) == "0"
-    #             computer_code.change_digit(i)
-    #         elsif mystery_code.get_info(i, computer_code.code[i]) == "1"
-    #             new_i = (i+1)%4
-    #             puts new_i
-    #             while mystery_code.get_info(i, computer_code.code[new_i]) == "2" || new_i == i
-    #                 new_i = (new_i+1)%4
-    #             end
-    #             computer_code.replace_number(new_i, computer_code.code[i])
-    #             computer_code.change_digit(i)
-    #         end
-    #         i += 1
-    #     end
-    #     puts computer_code.code
-    # end
+    number_of_attempts = 1
+    puts "Let's go see how the code cratcking goes"
+    puts computer_code.code
+    until mystery_code.equal?(computer_code.code)
+        i = 0
+        newCode = ""
+        4.times do
+            if mystery_code.get_info(i, computer_code.code[i]) == "0"
+                computer_code.delete_from_pool(computer_code.code[i])
+                digit = computer_code.generate_digit
+                while newCode.include?(digit)
+                    digit = computer_code.generate_digit
+                end
+                newCode += digit
+            elsif mystery_code.get_info(i, computer_code.code[i]) == "1"
+                digit = computer_code.generate_digit
+                while newCode.include?(digit) 
+                    digit = computer_code.generate_digit
+                end
+                newCode += digit
+            else
+                newCode += computer_code.code[i]
+                computer_code.delete_from_pool(computer_code.code[i])
+            end
+            i += 1
+        end
+        computer_code.code = newCode
+        puts computer_code.code
+        number_of_attempts += 1
+    end
+    puts "Oh, well... Computer broke your code after #{number_of_attempts} try"
 
 elsif role == 2
     mystery_code = Code.new(Code.new().generate_code)
