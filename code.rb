@@ -1,12 +1,14 @@
 class Code
     attr_accessor :code
+    attr_accessor :digitPool
     def initialize(code = "")
         @code = code
+        @digitPool = [0,1,2,3,4,5,6,7,8,9]
     end
     def generate_code
         i = 0
         while i < 4
-            digit = rand(10).to_s
+            digit = @digitPool.sample.to_s
             unless @code.include?(digit)
                 @code[i] = digit
                 i += 1
@@ -14,11 +16,19 @@ class Code
         end
         @code 
     end 
+    def change_digit(index)
+        digit = generate_digit(index)
+        while @code.include?(digit)
+            digit = generate_digit(index)
+        end
+        @code = replace_number(index, digit)
+    end
     def generate_digit(index)
-        rand(10).to_s
+        @digitPool.sample.to_s
     end
     def replace_number(index, digit)
         @code[index] = digit
+        @digitPool.delete(digit.to_i)
         return @code
     end
     def equal?(other)
